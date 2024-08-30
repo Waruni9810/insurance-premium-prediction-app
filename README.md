@@ -56,7 +56,7 @@ Download it (https://www.kaggle.com/datasets/tejashvi14/medical-insurance-premiu
 
 ## Deployment
 
-The application is deployed on Streamlit Cloud. Access it ().
+The application is deployed on Streamlit Cloud. Access it (https://insurance-premium-prediction-app-fiwtksjejujjz7gtqgadtr.streamlit.app/).
 
 ## Repository
 
