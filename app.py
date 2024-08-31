@@ -39,10 +39,8 @@ def load_data_with_progress():
         sleep(0.05)
         progress_bar.progress(i + 1)
     st.success("Data loaded successfully!")
-    st.balloons()  # Display balloons animation
     sleep(1)  # Short pause to display the success message
     st.empty()  # Clear the success message after a short time
-    
 
 # Custom CSS for improved styling and button customization
 st.markdown(
@@ -183,9 +181,6 @@ elif app_mode == 'About Us':
     st.image("about us.jpg", width=600, use_column_width=True)  # Add image after the About Us section
 
 elif app_mode == 'Prediction':
-    # Load data with progress bar
-    load_data_with_progress()
-    
     df = pd.read_csv("medical dataset/Medicalpremium.csv")
     model = load_or_create_model(df)
     
@@ -225,6 +220,8 @@ elif app_mode == 'Prediction':
     # Prediction button
     if st.sidebar.button('Predict Cost'):
         
+        load_data_with_progress()  # Only show this during prediction
+        
         with st.spinner('Predicting...'):
             user_data = pd.DataFrame({
                 'Age': [age],
@@ -245,13 +242,14 @@ elif app_mode == 'Prediction':
             
             st.markdown(f'<h3 style="color: #007BFF;">Predicted Yearly Premium Price: LKR {prediction_lkr:.2f}</h3>', unsafe_allow_html=True)
 
-
             # Display Graphs after Prediction
             fig, ax = plt.subplots()
             ax.bar(['Predicted Price'], [prediction_lkr], color="skyblue")
             ax.set_ylabel('Premium Price (LKR)')
             ax.set_title('Predicted Insurance Premium')
             st.pyplot(fig)
+
+            st.balloons()  # Display balloons animation
 
 elif app_mode == 'Contact Us':
     st.markdown('<h1 id="contact-us" class="main-header2">Contact Us</h1>', unsafe_allow_html=True)
